@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitro Bikes - Modelo Entidad Relación</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>NITRO BIKES</h1>
+        <p>Modelo Entidad-Relación de la Base de Datos</p>
+    </header>
+
+    <main>
+
+        <section class="introduccion">
+            <h2>Contextualización de la empresa NitroBikes</h2>
+
+            <p>La empresa objeto de análisis es NitroBikes, un establecimiento comercial ubicado en la ciudad de
+                Bogotá, dedicado a la comercialización de productos relacionados con el ciclismo. Dentro de su oferta se
+                encuentran bicicletas, accesorios, repuestos, implementos y elementos de indumentaria para los
+                diferentes tipos de usuarios y modalidades del ciclismo.</p>
+
+            <p>Su actividad económica se desarrolla principalmente en el sector comercial y deportivo, orientándose
+                a satisfacer las necesidades de ciclistas aficionados, recreativos y deportivos mediante la
+                disponibilidad de productos especializados para la práctica y mantenimiento de la bicicleta.</p>
+
+            <p>El modelo de negocio de NitroBikes se basa principalmente en la comercialización y distribución directa
+                de sus productos. Cuenta con tienda física para la venta directa y dispone de un canal digital mediante
+                el cual presenta su catálogo y permite realizar compras en línea, ampliando su alcance comercial.</p>
+
+            <p>La empresa también cuenta con mecanismos de distribución y logística para realizar el envío de productos
+                a diferentes lugares del territorio nacional. De esta manera, combina los canales de venta presencial y
+                digital, permitiendo atender clientes de Bogotá y de otras ciudades del país.</p>
+
+            <p>Desde la perspectiva de las bases de datos, las características del modelo de negocio de NitroBikes
+                permiten identificar diferentes procesos susceptibles de ser gestionados mediante un sistema de
+                información, entre ellos el registro de clientes, productos, categorías, proveedores, ventas, detalles
+                de las ventas, inventario y procesos relacionados con la distribución de los productos.</p>
+
+            <p>El análisis de estos procesos permitirá diseñar una base de datos relacional orientada a organizar la
+                información de la empresa y facilitar posteriormente la generación de consultas e indicadores que
+                contribuyan al análisis de las ventas, el comportamiento del inventario y la productividad del negocio.
+            </p>
+
+
+        </section>
+
+        <section class="diagrama">
+
+            <h2>Diagrama Entidad-Relación</h2>
+
+            <div class="modelo">
+                <img src="modelo entidad relacion.png" alt="Modelo Entidad-Relación de Nitro Bikes">
+            </div>
+
+            <section class="descripcion-mer">
+
+                <h2>Descripción del Modelo Entidad-Relación</h2>
+
+                <p class="introduccion-mer">
+                    El Modelo Entidad-Relación (MER) diseñado para Nitro Bikes representa
+                    la estructura de información necesaria para gestionar los principales
+                    procesos de la empresa, incluyendo proveedores, productos, inventario,
+                    clientes, pedidos, ventas, empleados, devoluciones y reembolsos.
+                    El modelo permite organizar los datos de manera estructurada,
+                    facilitar las relaciones entre las entidades y mantener la integridad
+                    de la información.
+                </p>
+
+                <div class="entidades-mer">
+
+                    <!-- PROVEEDORES -->
+                    <div class="entidad">
+                        <h3>Proveedores</h3>
+                        <p>
+                            Almacena la información de las empresas encargadas de
+                            suministrar los productos comercializados por Nitro Bikes.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_NIT:</strong> Identificador único del proveedor.</li>
+                            <li><strong>Nombre:</strong> Nombre del proveedor.</li>
+                            <li><strong>Ciudad:</strong> Ciudad donde se encuentra.</li>
+                            <li><strong>Dirección:</strong> Dirección del proveedor.</li>
+                            <li><strong>Teléfono:</strong> Número de contacto.</li>
+                            <li><strong>Correo:</strong> Correo electrónico.</li>
+                            <li><strong>Portafolio:</strong> Productos o servicios ofrecidos.</li>
+                        </ul>
+                    </div>
+
+                    <!-- PRODUCTO_PROVEEDOR -->
+                    <div class="entidad">
+                        <h3>Producto_Proveedor</h3>
+                        <p>
+                            Esta entidad permite relacionar los productos con los
+                            proveedores que los suministran. Funciona como entidad
+                            intermedia para gestionar la relación entre productos y
+                            proveedores y registra el precio de compra.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Proveedor:</strong> Identifica al proveedor.</li>
+                            <li><strong>Precio_Compra:</strong> Precio al que se adquiere el producto.</li>
+                        </ul>
+                    </div>
+
+                    <!-- PRODUCTOS -->
+                    <div class="entidad">
+                        <h3>Productos</h3>
+                        <p>
+                            Contiene la información de los productos comercializados
+                            por Nitro Bikes y permite identificar sus características,
+                            precio y disponibilidad.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Producto:</strong> Identificador único del producto.</li>
+                            <li><strong>Nombre:</strong> Nombre del producto.</li>
+                            <li><strong>ID_Proveedor:</strong> Identificación del proveedor.</li>
+                            <li><strong>Precio:</strong> Precio de venta.</li>
+                            <li><strong>Stock:</strong> Existencias disponibles.</li>
+                        </ul>
+                    </div>
+
+                    <!-- INVENTARIO -->
+                    <div class="entidad">
+                        <h3>Inventario</h3>
+                        <p>
+                            Permite controlar la cantidad disponible de productos y
+                            establecer niveles mínimos y máximos para facilitar la
+                            gestión de existencias.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Inventario:</strong> Identificador del inventario.</li>
+                            <li><strong>Categoría:</strong> Categoría del producto.</li>
+                            <li><strong>Cantidad disponible:</strong> Existencias actuales.</li>
+                            <li><strong>Cantidad mínima:</strong> Nivel mínimo permitido.</li>
+                            <li><strong>Cantidad máxima:</strong> Capacidad máxima de inventario.</li>
+                            <li><strong>ID_Producto:</strong> Producto asociado al inventario.</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLIENTES -->
+                    <div class="entidad">
+                        <h3>Clientes</h3>
+                        <p>
+                            Registra la información de las personas que realizan
+                            compras y solicitan pedidos a Nitro Bikes.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_N° Cédula:</strong> Identificador del cliente.</li>
+                            <li><strong>Nombre:</strong> Nombre completo.</li>
+                            <li><strong>Teléfono:</strong> Número de contacto.</li>
+                            <li><strong>Correo:</strong> Correo electrónico.</li>
+                            <li><strong>Dirección:</strong> Dirección de residencia.</li>
+                            <li><strong>Ciudad:</strong> Ciudad del cliente.</li>
+                            <li><strong>Código Postal:</strong> Código postal.</li>
+                        </ul>
+                    </div>
+
+                    <!-- PEDIDOS -->
+                    <div class="entidad">
+                        <h3>Pedidos</h3>
+                        <p>
+                            Registra las solicitudes de compra realizadas por los
+                            clientes y permite realizar seguimiento al proceso de
+                            entrega y estado del pedido.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Pedido:</strong> Identificador del pedido.</li>
+                            <li><strong>Guía de envío:</strong> Código de seguimiento.</li>
+                            <li><strong>Destino:</strong> Lugar de entrega.</li>
+                            <li><strong>Estado:</strong> Estado actual del pedido.</li>
+                            <li><strong>ID_Factura:</strong> Factura asociada.</li>
+                            <li><strong>Valor Pedido:</strong> Valor total.</li>
+                            <li><strong>Tipo_Venta:</strong> Tipo de venta realizada.</li>
+                        </ul>
+                    </div>
+
+                    <!-- DETALLE PEDIDO -->
+                    <div class="entidad">
+                        <h3>Detalle_Pedido</h3>
+                        <p>
+                            Registra los productos incluidos en cada pedido, indicando
+                            las cantidades y el precio unitario correspondiente.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Pedido:</strong> Pedido asociado.</li>
+                            <li><strong>ID_Producto:</strong> Producto incluido.</li>
+                            <li><strong>Cantidad:</strong> Número de unidades.</li>
+                            <li><strong>Precio_Unitario:</strong> Precio de cada unidad.</li>
+                        </ul>
+                    </div>
+
+                    <!-- VENTA -->
+                    <div class="entidad">
+                        <h3>Venta</h3>
+                        <p>
+                            Almacena la información relacionada con las transacciones
+                            comerciales realizadas por Nitro Bikes.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Factura:</strong> Identificador de la factura.</li>
+                            <li><strong>Canal de Venta:</strong> Medio utilizado para realizar la venta.</li>
+                            <li><strong>Método de Pago:</strong> Forma de pago utilizada.</li>
+                            <li><strong>ID_Cliente:</strong> Cliente asociado.</li>
+                            <li><strong>Fecha:</strong> Fecha de la venta.</li>
+                        </ul>
+                    </div>
+
+                    <!-- EMPLEADOS -->
+                    <div class="entidad">
+                        <h3>Empleados</h3>
+                        <p>
+                            Contiene la información del personal encargado de gestionar
+                            las ventas y diferentes procesos comerciales de la empresa.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID N° Cédula:</strong> Identificador del empleado.</li>
+                            <li><strong>Nombre:</strong> Nombre del empleado.</li>
+                            <li><strong>Cargo:</strong> Cargo desempeñado.</li>
+                            <li><strong>Pedidos:</strong> Pedidos gestionados.</li>
+                            <li><strong>Teléfono:</strong> Número de contacto.</li>
+                            <li><strong>Correo:</strong> Correo electrónico.</li>
+                        </ul>
+                    </div>
+
+                    <!-- DEVOLUCION -->
+                    <div class="entidad">
+                        <h3>Devolución</h3>
+                        <p>
+                            Registra las devoluciones realizadas por los clientes,
+                            permitiendo identificar la fecha y el motivo de la devolución.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Devolución:</strong> Identificador de la devolución.</li>
+                            <li><strong>Fecha_Devolución:</strong> Fecha en que se realiza.</li>
+                            <li><strong>Motivo:</strong> Razón de la devolución.</li>
+                        </ul>
+                    </div>
+
+                    <!-- DETALLES DEVOLUCIONES -->
+                    <div class="entidad">
+                        <h3>Detalles_Devoluciones</h3>
+                        <p>
+                            Registra el detalle de los productos involucrados en una
+                            devolución, incluyendo la cantidad correspondiente.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Detalle_Dev:</strong> Identificador del detalle.</li>
+                            <li><strong>Fecha_Devolución:</strong> Fecha de la devolución.</li>
+                            <li><strong>ID_Producto:</strong> Producto devuelto.</li>
+                            <li><strong>ID_Cantidad:</strong> Cantidad devuelta.</li>
+                        </ul>
+                    </div>
+
+                    <!-- REEMBOLSO -->
+                    <div class="entidad">
+                        <h3>Reembolso</h3>
+                        <p>
+                            Registra la información relacionada con la devolución del
+                            dinero al cliente cuando una devolución genera una compensación económica.
+                        </p>
+
+                        <ul>
+                            <li><strong>ID_Reembolso:</strong> Identificador del reembolso.</li>
+                            <li><strong>Fecha_Reembolso:</strong> Fecha del reembolso.</li>
+                            <li><strong>Monto:</strong> Valor reembolsado.</li>
+                            <li><strong>Método_Pago:</strong> Medio utilizado para realizar el reembolso.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- RELACIONES -->
+                <div class="relaciones-mer">
+
+                    <h3>Relaciones principales del modelo</h3>
+
+                    <p>
+                        El modelo establece diferentes relaciones entre las entidades
+                        para representar los procesos principales de Nitro Bikes:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Proveedores → Productos:</strong>
+                            los proveedores suministran los productos comercializados por la empresa.
+                        </li>
+
+                        <li>
+                            <strong>Productos → Inventario:</strong>
+                            los productos son almacenados y controlados mediante el inventario.
+                        </li>
+
+                        <li>
+                            <strong>Clientes → Pedidos:</strong>
+                            los clientes solicitan pedidos a Nitro Bikes.
+                        </li>
+
+                        <li>
+                            <strong>Pedidos → Detalle_Pedido:</strong>
+                            cada pedido registra los productos, cantidades y precios correspondientes.
+                        </li>
+
+                        <li>
+                            <strong>Pedidos → Ventas:</strong>
+                            los pedidos se relacionan con las transacciones de venta.
+                        </li>
+
+                        <li>
+                            <strong>Empleados → Ventas:</strong>
+                            los empleados participan en la realización y gestión de las ventas.
+                        </li>
+
+                        <li>
+                            <strong>Pedidos → Devoluciones:</strong>
+                            un pedido puede generar una devolución cuando el cliente solicita retornar un producto.
+                        </li>
+
+                        <li>
+                            <strong>Devoluciones → Reembolsos:</strong>
+                            una devolución puede generar un reembolso del dinero al cliente.
+                        </li>
+                    </ul>
+
+                </div>
+
+
+
+            </section>
+
+        </section>
+
+        <section class="relaciones">
+
+            <h2>Sentencias SQL</h2>
+
+            <div class="relacion-card">
+                <h3>Crear la Base de Datos</h3>
+                <p>
+                    CREATE DATABASE nitro_bikes;
+
+                    USE nitro_bikes;
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Proveedores</h3>
+                <p>
+                    CREATE TABLE Proveedores (
+                    ID_Proveedores INT PRIMARY KEY AUTO_INCREMENT,
+                    Nombre VARCHAR(45),
+                    Ciudad VARCHAR(45),
+                    Direccion VARCHAR(45)
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Clientes</h3>
+                <p>
+                    CREATE TABLE Clientes (
+                    ID_Cliente INT PRIMARY KEY AUTO_INCREMENT,
+                    Nombre VARCHAR(40),
+                    Telefono VARCHAR(15),
+                    Correo VARCHAR(30),
+                    Direccion VARCHAR(30),
+                    Ciudad VARCHAR(20),
+                    Codigo_Postal VARCHAR(10)
+                    );
+                </p>
+            </div>
+
+            <div class="relacion-card">
+                <h3>Empleados</h3>
+                <p>
+                    CREATE TABLE Empleados (
+                    ID_Empleados INT PRIMARY KEY AUTO_INCREMENT,
+                    Nombre VARCHAR(45),
+                    Cargo VARCHAR(45),
+                    Pedidos INT,
+                    Ventas_ID_Ventas INT
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Ventas</h3>
+                <p>
+                    CREATE TABLE Ventas (
+                    ID_Ventas INT PRIMARY KEY AUTO_INCREMENT,
+                    Canal_Ventas VARCHAR(45),
+                    Metodo_Pago VARCHAR(45),
+                    ID_Cliente INT,
+                    Fecha VARCHAR(45),
+                    Empleados_ID_Empleados INT
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Inventario</h3>
+                <p>
+                    CREATE TABLE Inventario (
+                    ID_Inventario INT PRIMARY KEY AUTO_INCREMENT,
+                    Categoria VARCHAR(45),
+                    Cantidad_Disponible VARCHAR(45),
+                    Cantidad_Minima VARCHAR(45),
+                    Cantidad_Maxima VARCHAR(45),
+                    ID_Producto INT
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Detalle Pedido</h3>
+                <p>
+                    CREATE TABLE Detalle_Pedido (
+                    idDetalle_Pedido INT PRIMARY KEY AUTO_INCREMENT,
+                    ID_Producto INT,
+                    Cantidad INT,
+                    Precio_Unitario VARCHAR(45)
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Productos</h3>
+                <p>
+                    CREATE TABLE Productos (
+                    ID_Productos INT PRIMARY KEY AUTO_INCREMENT,
+                    Nombre VARCHAR(45),
+                    ID_Proveedor INT,
+                    Precio VARCHAR(45),
+                    Stock VARCHAR(45),
+                    Pedido_idPedido INT,
+                    Inventario_ID_Inventario INT
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Pedidos</h3>
+                <p>
+                    CREATE TABLE Pedido (
+                    idPedido INT PRIMARY KEY AUTO_INCREMENT,
+                    Guia_Envio VARCHAR(15),
+                    Destino VARCHAR(30),
+                    Estado VARCHAR(15),
+                    ID_Factura VARCHAR(15),
+                    Valor_Pedido VARCHAR(20),
+                    Ventas_ID_Ventas INT,
+                    Detalle_Pedido_idDetalle_Pedido INT
+                    );
+                </p>
+
+            </div>
+
+            <div class="relacion-card">
+                <h3>Devoluciones</h3>
+                <p>
+                    CREATE TABLE Devoluciones (
+                    idDevoluciones INT PRIMARY KEY AUTO_INCREMENT,
+                    Fecha_Devolucion VARCHAR(45),
+                    ID_Producto INT,
+                    ID_Pedido INT,
+                    Motivo VARCHAR(45),
+                    Pedido_idPedido INT
+                    );
+                </p>
+
+            </div>
+
+            <h2>Finalmente tabla intermedia entre Productos y Proveedores</h2>
+
+            <div class="relacion-card">
+                <h3>Productos y Proveedores</h3>
+                <p>
+                    CREATE TABLE Productos_has_Proveedores (
+                    Productos_ID_Productos INT,
+                    Proveedores_ID_Proveedores INT,
+                    Precio_de_compra DECIMAL(10,2),
+                    PRIMARY KEY (Productos_ID_Productos, Proveedores_ID_Proveedores)
+                    );
+                </p>
+
+            </div>
+
+
+        </section>
+
+        <section class="diagrama">
+            <h2>Tablas de Bases de Datos con SQL Workbench</h2>
+
+            <p>
+                Diseño de las tablas de bases de datos a partir del modelo entidad-relación.
+            </p>
+
+            <div class="contenedor-imagen">
+                <img src="./tablas base de datos NitroBikes.png" alt="Tablas de Bases de Datos Nitro Bikes">
+            </div>
+        </section>
+
+        <!-- =========================================
+     MEJORAR LA PRODUCTIVIDAD DE LA EMPRESA
+     ========================================= -->
+
+        <section class="productividad">
+
+            <h2>Mejorar la productividad de la empresa</h2>
+
+            <p class="introduccion-productividad">
+                Uno de los puntos clave para una empresa dedicada al sector de ventas
+                de una gran variedad de productos de diferente tipo y naturaleza es el
+                manejo de la información, ya que un correcto manejo de esta implica
+                orden y control en cada aspecto de la operación.
+            </p>
+
+            <p class="introduccion-productividad">
+                La actividad del negocio puede optimizarse mediante la implementación
+                de sistemas de bases de datos relacionales, acompañados de estrategias
+                de analítica de datos e inteligencia de negocios. Para Nitro Bikes,
+                esta implementación puede abordarse mediante las siguientes estrategias:
+            </p>
+
+
+            <!-- INTEGRACIÓN DE PROCESOS -->
+
+            <div class="estrategia">
+
+                <div class="estrategia-titulo">
+                    <span>01</span>
+                    <h3>Integración de procesos operativos</h3>
+                </div>
+
+                <p>
+                    Centralizar la información permite conectar los diferentes procesos
+                    de la empresa y facilita el acceso a datos confiables y actualizados.
+                </p>
+
+                <ul>
+                    <li>
+                        Unificar la información de <strong>ventas, inventario y
+                            devoluciones</strong> en una base de datos centralizada.
+                    </li>
+
+                    <li>
+                        Implementar <strong>tablas relacionales</strong> para reducir
+                        la duplicidad de datos y mejorar la trazabilidad de cada
+                        producto y cliente.
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!-- AUTOMATIZACIÓN -->
+
+            <div class="estrategia">
+
+                <div class="estrategia-titulo">
+                    <span>02</span>
+                    <h3>Automatización de tareas administrativas</h3>
+                </div>
+
+                <p>
+                    El uso de sistemas gestores de bases de datos permite automatizar
+                    actividades que tradicionalmente requieren tiempo y procesamiento
+                    manual.
+                </p>
+
+                <ul>
+                    <li>
+                        Utilizar un <strong>SGBD relacional</strong> para generar
+                        reportes automáticos de ventas, stock y desempeño de las
+                        actividades.
+                    </li>
+
+                    <li>
+                        Reducir los tiempos destinados a cada actividad administrativa
+                        mediante la automatización y disponibilidad de la información.
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!-- ANALÍTICA PREDICTIVA -->
+
+            <div class="estrategia">
+
+                <div class="estrategia-titulo">
+                    <span>03</span>
+                    <h3>Analítica predictiva y toma de decisiones</h3>
+                </div>
+
+                <p>
+                    La información almacenada en la base de datos puede convertirse
+                    en conocimiento mediante técnicas de analítica de datos, permitiendo
+                    identificar tendencias y apoyar la toma de decisiones.
+                </p>
+
+                <ul>
+                    <li>
+                        Aplicar modelos de <strong>analítica de datos</strong> para
+                        identificar patrones de compra, rotación de inventarios y
+                        demanda de productos.
+                    </li>
+
+                    <li>
+                        Optimizar el abastecimiento de inventarios con base en los
+                        datos históricos de consumo de los clientes y en las tendencias
+                        cambiantes del mercado.
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!-- DEVOLUCIONES Y REEMBOLSOS -->
+
+            <div class="estrategia">
+
+                <div class="estrategia-titulo">
+                    <span>04</span>
+                    <h3>Gestión eficiente de devoluciones y reembolsos</h3>
+                </div>
+
+                <p>
+                    La gestión adecuada de las devoluciones permite mejorar el control
+                    de los productos y ofrecer una mejor experiencia al cliente.
+                </p>
+
+                <ul>
+                    <li>
+                        Implementar estrategias que permitan identificar qué representa
+                        cada dato y cómo se relaciona con los demás, utilizando
+                        herramientas como el <strong>Modelo Entidad-Relación (MER)</strong>,
+                        especialmente en el manejo de productos devueltos.
+                    </li>
+
+                    <li>
+                        Mejorar la comunicación con los clientes durante los procesos
+                        de devolución y reembolso, proporcionando información clara
+                        y oportuna para fortalecer su experiencia y favorecer la
+                        fidelización.
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <div class="estrategia">
+
+                <div class="estrategia-titulo">
+                    <span>05</span>
+                    <h3>Dashboard de indicadores de rendimiento (KPIs)</h3>
+                </div>
+
+                <p>
+                    La visualización de información permite transformar los datos
+                    almacenados en la base de datos en indicadores útiles para
+                    supervisar el desempeño de la empresa.
+                </p>
+
+                <ul>
+                    <li>
+                        Utilizar herramientas de visualización de datos como
+                        <strong>Power BI o Tableau</strong>, conectadas al sistema
+                        de base de datos para automatizar la generación y actualización
+                        de indicadores.
+                    </li>
+
+                    <li>
+                        Supervisar métricas organizadas por categorías que permitan
+                        obtener una visión más clara de la situación actual de la empresa.
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <!-- CONCLUSIÓN -->
+
+            <div class="productividad-conclusion">
+
+                <h3>Impacto esperado</h3>
+
+                <p>
+                    La implementación de estas estrategias permitiría a Nitro Bikes
+                    mejorar el manejo de la información, reducir tareas repetitivas,
+                    controlar de manera más eficiente el inventario y las devoluciones,
+                    y disponer de información confiable para la toma de decisiones.
+                    Además, la integración de bases de datos con herramientas de
+                    analítica y visualización facilitaría la identificación de
+                    oportunidades de mejora y contribuiría al aumento de la
+                    productividad de la empresa.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =========================================
+     CONCLUSIONES
+     ========================================= -->
+
+        <section class="conclusiones">
+
+            <h2>Conclusiones</h2>
+
+            <div class="conclusiones-contenido">
+
+                <div class="conclusion">
+                    <h3>01. Importancia del Modelo Entidad-Relación</h3>
+
+                    <p>
+                        Los diagramas Entidad-Relación (ER) permiten comprender la
+                        estructura lógica de los datos al identificar las entidades,
+                        atributos y relaciones que forman parte de un sistema de
+                        información. En el caso de Nitro Bikes, el modelo permite
+                        visualizar cómo interactúan procesos como las ventas,
+                        los pedidos, el inventario, los productos y las devoluciones.
+                    </p>
+                </div>
+
+
+                <div class="conclusion">
+                    <h3>02. Implementación del esquema relacional</h3>
+
+                    <p>
+                        El esquema relacional permite transformar el modelo conceptual
+                        en una estructura lógica que puede ser implementada mediante
+                        SQL. Esta transformación facilita la organización de la
+                        información y contribuye a garantizar la integridad y
+                        consistencia de los datos, además de facilitar las consultas
+                        y el acceso a la información almacenada.
+                    </p>
+                </div>
+
+
+                <div class="conclusion">
+                    <h3>03. Importancia de SQL</h3>
+
+                    <p>
+                        SQL constituye una herramienta fundamental para la gestión de
+                        bases de datos, ya que permite crear estructuras, insertar,
+                        actualizar, eliminar y consultar información de manera
+                        organizada. Estas capacidades permiten generar reportes y
+                        análisis que pueden proporcionar información relevante para
+                        la gestión y el desarrollo de las empresas.
+                    </p>
+                </div>
+
+
+                <div class="conclusion">
+                    <h3>04. Datos para la toma de decisiones</h3>
+
+                    <p>
+                        Comprender el funcionamiento de las bases de datos relacionales
+                        es fundamental para transformar los datos generados por la
+                        actividad empresarial en información útil. En este contexto,
+                        SQL actúa como una herramienta que permite conectar los datos
+                        operativos con procesos de análisis y toma de decisiones
+                        estratégicas.
+                    </p>
+                </div>
+
+
+                <div class="conclusion">
+                    <h3>05. Aplicación en Nitro Bikes</h3>
+
+                    <p>
+                        La implementación de esquemas, bases de datos, modelos
+                        Entidad-Relación y sistemas gestores de bases de datos no solo
+                        fortalece los aspectos técnicos del análisis de datos, sino
+                        que también puede contribuir a optimizar procesos operativos
+                        y apoyar decisiones fundamentadas en información. Para
+                        Nitro Bikes, la gestión adecuada de los datos representa una
+                        oportunidad para mejorar su eficiencia y desarrollar
+                        estrategias orientadas al crecimiento y a una mayor
+                        competitividad en el mercado colombiano.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+     BIBLIOGRAFÍA
+     ========================================= -->
+
+        <section class="bibliografia">
+
+            <h2>Bibliografía</h2>
+
+            <div class="referencias">
+
+                <p>
+                    TodoCode. (2025). Normalización en Bases de Datos. Youtube
+                    https://www.youtube.com/watch?v=kvt2wE-q-yY
+                </p>
+
+                <p>
+                    Shakmuria. (2020). Aprender MySQL -Introducción a las bases de datos. Youtube
+                    https://www.youtube.com/watch?v=sBcPQ9YS28A&list=PLDfQIFbmwhrc7K3kINzhGRGMFQQx9xn0q
+                </p>
+
+                <p>
+                <p>
+                    Universidad Católica de Colombia. (s. f.).
+                    <em>Unidad 2: Características funcionales de un sistema de bases de datos</em>
+                    [Material de apoyo].
+                </p>
+                </p>
+
+            </div>
+
+        </section>
+
+</body>
+
+</html>
